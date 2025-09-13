@@ -83,22 +83,25 @@
 
     setInterval(() => {
       createElement("petal");
-      if(Math.random() > 0.5) createElement("heart");
+      if (Math.random() > 0.5) createElement("heart");
     }, 300);
 
     const msgEl = document.querySelector('.message');
-    const text = msgEl.innerHTML;
+    const rawHTML = msgEl.innerHTML;
     msgEl.innerHTML = '';
+
+    const fragments = rawHTML.split(/(<br\s*\/?>|<\/?strong>|🎂🎉|🍰|✨|❤️)/gi).filter(f => f !== '');
+
     let i = 0;
     function typeWriter() {
-      if(i < text.length){
-        msgEl.innerHTML += text.charAt(i);
+      if (i < fragments.length) {
+        msgEl.innerHTML += fragments[i];
         i++;
-        setTimeout(typeWriter, 25);
+        setTimeout(typeWriter, 100);
       }
     }
+
     typeWriter();
   </script>
 </body>
 </html>
-
