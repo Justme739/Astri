@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Joyeux Anniversaire Astrid</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #ffb6c1);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .message {
+      position: relative;
+      color: #fff;
+      text-align: center;
+      font-size: 1.8em;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+      max-width: 600px;
+      line-height: 1.5em;
+      opacity: 0;
+      animation: fadeIn 2s forwards;
+      animation-delay: 0.5s;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .petal, .heart {
+      position: absolute;
+      top: -50px;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    .petal {
+      width: 20px;
+      height: 20px;
+      background: pink;
+      border-radius: 50%;
+    }
+
+    .heart {
+      width: 20px;
+      height: 20px;
+      background: pink;
+      clip-path: polygon(50% 0%, 61% 12%, 75% 12%, 87% 25%, 87% 38%, 75% 50%, 50% 80%, 25% 50%, 13% 38%, 13% 25%, 25% 12%, 39% 12%);
+    }
+
+    @keyframes fall {
+      0% {transform: translateY(0) rotate(0deg);}
+      100% {transform: translateY(100vh) rotate(360deg);}
+    }
+  </style>
+</head>
+<body>
+  <div class="message">
+    🎂🎉 <strong>Joyeux 9ème anniversaire Astrid !</strong> 🎉🎂<br><br>
+    Waouh, déjà 9 ans ! Que le temps passe vite…<br>
+    Aujourd’hui, c’est TA journée et elle doit être remplie de rires, de surprises et de plein de gâteaux 🍰 !<br>
+    Que tes rêves les plus fous deviennent réalité et que chaque instant soit rempli de magie ✨.<br>
+    Amuse-toi à fond, danse, chante, joue et profite de chaque moment !<br>
+    N’oublie jamais que tu es incroyable et que je t’aime très fort ❤️.
+  </div>
+
+  <script>
+    function createElement(type) {
+      const el = document.createElement("div");
+      el.classList.add(type);
+      el.style.left = Math.random() * 100 + "vw";
+      el.style.width = el.style.height = (15 + Math.random() * 15) + "px";
+      el.style.animationDuration = (5 + Math.random() * 5) + "s";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 10000);
+    }
+
+    setInterval(() => {
+      createElement("petal");
+      if(Math.random() > 0.5) createElement("heart");
+    }, 300);
+
+    const msgEl = document.querySelector('.message');
+    const text = msgEl.innerHTML;
+    msgEl.innerHTML = '';
+    let i = 0;
+    function typeWriter() {
+      if(i < text.length){
+        msgEl.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 25);
+      }
+    }
+    typeWriter();
+  </script>
+</body>
+</html>
+

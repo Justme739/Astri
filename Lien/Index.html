@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Connexion Astrid</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ffb6c1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
+    .box {
+      background: white;
+      padding: 25px 35px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+      text-align: center;
+      position: relative;
+      animation: pop 0.5s ease;
+    }
+    @keyframes pop {
+      0% {transform: scale(0);}
+      100% {transform: scale(1);}
+    }
+    input {
+      padding: 10px;
+      border-radius: 8px;
+      border: 2px solid #ccc;
+      width: 220px;
+      margin-bottom: 12px;
+      font-size: 16px;
+      transition: border-color 0.3s;
+    }
+    input.error-field {
+      border-color: red;
+      animation: blink 0.3s alternate 3;
+    }
+    @keyframes blink {
+      from {border-color: red;}
+      to {border-color: #ccc;}
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #ff6b9a;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    button:hover {
+      transform: scale(1.1);
+    }
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-size: 14px;
+      display: none;
+      animation: shake 0.3s;
+    }
+    @keyframes shake {
+      0%, 100% {transform: translateX(0);}
+      25% {transform: translateX(-5px);}
+      50% {transform: translateX(5px);}
+      75% {transform: translateX(-5px);}
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    <h2>Entre ton nom et prénom</h2>
+    <input type="text" id="lastNameInput" placeholder="Nom">
+    <br>
+    <input type="text" id="firstNameInput" placeholder="Prénom">
+    <br>
+    <button onclick="checkName()">Valider</button>
+    <div class="error" id="errorMsg">❌ Oups ! Entre le nom et le prénom de la star du jour ! 😜</div>
+  </div>
+
+  <script>
+    function checkName() {
+      const lastNameInput = document.getElementById("lastNameInput");
+      const firstNameInput = document.getElementById("firstNameInput");
+      const lastName = lastNameInput.value.trim().toUpperCase();
+      const firstName = firstNameInput.value.trim().toUpperCase();
+      const error = document.getElementById("errorMsg");
+
+      if (lastName === "AGOHOUMBO" && firstName === "ASTRID") {
+        window.location.href = "page2.html"; // redirection vers la page anniversaire
+      } else {
+        // Affiche message d'erreur
+        error.style.display = "block";
+
+        // Ajoute l'effet shake et champ qui clignote
+        lastNameInput.classList.add("error-field");
+        firstNameInput.classList.add("error-field");
+
+        // Retirer les classes après animation pour réutilisation
+        setTimeout(() => {
+          lastNameInput.classList.remove("error-field");
+          firstNameInput.classList.remove("error-field");
+        }, 1000);
+      }
+    }
+  </script>
+</body>
+</html>
+
